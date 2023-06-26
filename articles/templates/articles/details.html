@@ -1,0 +1,13 @@
+{% extends 'articles/base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="element2">
+    <div class="title2">
+        <h2 class="top2">{{ art.title }}</h2>
+        <p class="img2"><img src="{{ art.title_pic.url }}" alt=""></p>
+    </div>
+        <p class="text">{{ art.art_text }}</p>
+        <p class="rating">Оценка читателей: {{ art.rating }}</p>
+</div>
+{% endblock %}

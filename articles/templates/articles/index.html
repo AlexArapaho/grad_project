@@ -1,0 +1,27 @@
+{% extends "articles/base.html" %}
+
+{% block content %}
+
+<div class="head">
+    Блог Александра Грибова
+    <div class="menu">
+        <div class="contref"><a class="ref" href="{% url 'signup' %}" target="_blank">Регистрация</a></div>
+        <div class="contref"><a class="ref" href="" target="_blank">Вход</a></div>
+    </div>
+</div>
+
+<p class="des">Статьи об интересных (по мнению автора) фактах<br>
+    и явлениях культуры, истории, политики, литературы и т.д. </p>
+
+{% for art in arts %}
+<div class="element">
+    <div class="title">
+        <h2 class="top"><a href="{% url 'detail' art.id %}" target="_blank">{{ art.title }}</a></h2>
+        <p class="img"><img src="{{ art.title_pic.url }}" alt=""></p>
+    </div>
+        <p class="text"><a href="{% url 'detail' art.id %}" target="_blank">{{ art.art_text|truncatechars:400 }}</a></p>
+        <p class="rating">Оценка читателей: {{ art.rating }}</p>
+</div>
+
+{% endfor %}
+{% endblock %}
