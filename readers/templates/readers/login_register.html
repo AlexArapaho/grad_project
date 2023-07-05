@@ -1,0 +1,25 @@
+{% extends 'articles/base.html' %}
+
+{% block content %}
+{% if page == 'register' %}
+<div class="element3">
+<h1>Регистрация</h1>
+<div>{{ error }}</div>
+<form class='register' action="{% url 'register' %}" method='post'>
+{% csrf_token %}
+{{ form.as_p }}
+<button class='btn'>Зарегистрироваться</button>
+</form>
+</div>
+{% else %}
+<div class="element3">
+    <h1>Авторизация</h1>
+<div>{{ error }}</div>
+<form class='register' action="{% url 'login' %}" method='post'>
+    {% csrf_token %}
+    {{ form.as_p }}
+<div><button class='btn'>Войти</button></div>
+</form>
+</div>
+{% endif %}
+{% endblock %}

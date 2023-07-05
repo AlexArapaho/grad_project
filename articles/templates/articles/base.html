@@ -8,6 +8,22 @@
     <link rel="icon" type='image/x-icon' href="{% static 'articles/favicon.ico' %}">
 </head>
 <body>
+<div class="head">
+    <a href="{% url 'index' %}">Блог Александра Грибова</a>
+    {% if request.user.is_authenticated %}
+        <div class="menu">
+        <div class="contref">Читатель: {{ user.profile.name }}</div>
+        <div class="contref"><a class="ref" href="{% url 'logout' %}" target="_blank">Выйти</a></div>
+    </div>
+
+    {% else %}
+    <div class="menu">
+        <div class="contref"><a class="ref" href="{% url 'register' %}" target="_blank">Регистрация</a></div>
+        <div class="contref"><a class="ref" href="{% url 'login' %}" target="_blank">Вход</a></div>
+    </div>
+     {% endif %}
+</div>
+
 {% block content %}
 {% endblock %}
 </body>
