@@ -9,5 +9,14 @@
     </div>
         <p class="text">{{ art.art_text|safe }}</p>
         <p class="rating">Оценка читателей: {{ art.rating }}</p>
+        <p>{{ feedback }}</p>
+
+    <h2 class="feed">Напишите комментарий к статье</h2>
+    <div>{{ error }}</div>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <div><button class="btn">Опубликовать комментарий</button></div>
+    </form>
 </div>
 {% endblock %}

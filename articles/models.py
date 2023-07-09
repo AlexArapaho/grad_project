@@ -1,4 +1,6 @@
 from django.db import models
+from django.contrib.auth.models import User
+from readers.models import Profile
 
 class Articles(models.Model):
     objects = None
@@ -9,3 +11,13 @@ class Articles(models.Model):
 
     def __str__(self):
         return self.title
+
+class Feedback(models.Model):
+    feedback = models.TextField()
+    commentator = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    article = models.ForeignKey(Articles, on_delete=models.CASCADE)
+
+
+
+    def __str__(self):
+        return self.feedback
