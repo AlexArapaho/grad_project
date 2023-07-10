@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Articles, Feedback, User
-from .forms import FeedbackForm
+from .models import Articles, PostFeedback, User
+from .forms import PostFeedbackForm
 from django.contrib.auth.forms import UserCreationForm
 
 
@@ -13,9 +13,9 @@ def index(request):
 def detail(request, pk):
     # art = get_object_or_404(Articles, pk=art_id)
     art = Articles.objects.get(id=pk)
-    form = FeedbackForm()
+    form = PostFeedbackForm()
     if request.method == 'POST':
-        form = FeedbackForm(request.POST)
+        form = PostFeedbackForm(request.POST)
         feedback = form.save(commit=False)
         feedback.article = art
         feedback.commentator = request.user.profile
