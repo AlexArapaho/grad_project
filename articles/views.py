@@ -39,4 +39,4 @@ def detail(request, pk):
     #     new_feed.user = request.user.profile
     #     new_feed.save()
     #     return render(request, 'articles/details.html', context)
-    return render(request, 'articles/details.html', {'art': art, 'form': form})
+    return render(request, 'articles/details.html', {'art': art, 'form': form, 'feedback': feedback})
