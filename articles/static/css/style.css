@@ -28,9 +28,12 @@ body {
 }
 
 .text{
-    max-width: 600px;
-
+    width: 500px;
     font-size: 22px;
+}
+
+.title{
+    width: 300px;
 }
 
 .element{
@@ -73,9 +76,7 @@ a {
 
 }
 
-.title{
-    max-width: 360;
-}
+
 
 .menu{
 
@@ -110,6 +111,16 @@ a {
     font-size: 24px;
  }
 
+.postedfeed {
+    font-weight: bold;
 
+}
+
+.postfeedsection {
+    background: lightblue;
+    margin: 5px 5px;
+    padding: 5px 5px;
+    width: 500px;
+}
 
 
