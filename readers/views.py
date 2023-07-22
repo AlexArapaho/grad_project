@@ -65,7 +65,5 @@ def logout_reader(request):
 
 def profile(request, pk):
     prof = Profile.objects.get(id=pk)
-    context = {
-        'profile': prof,
-    }
-    return render(request, 'readers/profile.html', context)
+
+    return render(request, 'readers/profile.html', {'profile': prof})

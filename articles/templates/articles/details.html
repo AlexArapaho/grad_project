@@ -11,7 +11,7 @@
         <p class="rating">Оценка читателей: {{ art.rating }}</p>
         {% for feed in art.postfeedback_set.all %}
         <div class="postfeedsection">
-        <p>Комментарий читателя {{ feed.commentator }} </p>
+        <p> Комментарий читателя <a href="{% url 'profile' feed.commentator.id %}">{{ feed.commentator }}</a></p>
         <p class="postedfeed">{{ feed }}</p>
         </div>
         {% endfor %}
