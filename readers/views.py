@@ -67,3 +67,7 @@ def profile(request, pk):
     prof = Profile.objects.get(id=pk)
 
     return render(request, 'readers/profile.html', {'profile': prof})
+
+def account(request):
+    prof = request.user.profile
+    return render(request, 'readers/account.html', {'profile': prof})

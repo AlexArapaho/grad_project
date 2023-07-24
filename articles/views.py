@@ -15,12 +15,15 @@ def detail(request, pk):
     art = Articles.objects.get(id=pk)
     form = PostFeedbackForm()
     if request.method == 'POST':
-        form = PostFeedbackForm(request.POST)
-        feedback = form.save(commit=False)
-        feedback.article = art
-        feedback.commentator = request.user.profile
-        feedback.save()
-        return redirect('detail', pk=art.id)
+        try:
+            form = PostFeedbackForm(request.POST)
+            feedback = form.save(commit=False)
+            feedback.article = art
+            feedback.commentator = request.user.profile
+            feedback.save()
+            return redirect('detail', pk=art.id)
+        except AttributeError:
+            return redirect('login')
 
     # new_feed = Feedback.objects.all()
     # prof = request.user
