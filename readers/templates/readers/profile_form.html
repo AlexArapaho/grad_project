@@ -1,0 +1,18 @@
+{% extends 'articles/base.html' %}
+{% load static %}
+{% block content %}
+<p class="element2">Редактирование профиля</p>
+                <form class="register" method="POST" action="{% url 'edit_account' %}" enctype="multipart/form-data">
+                    {% csrf_token %}
+
+                    {% for field in form %}
+                    <div>
+
+                        {{ field }}
+                    </div>
+                    {% endfor %}
+
+                    <input class="btn" type="submit" value="Изменить" />
+                </form>
+
+{% endblock %}

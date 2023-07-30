@@ -4,6 +4,8 @@ from .models import Profile
 from django.db import IntegrityError
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
+from .forms import ProfileForm
 from django.core.exceptions import ObjectDoesNotExist
 
 
@@ -21,7 +23,7 @@ def register_reader(request):
                 user = User.objects.create_user(request.POST['username'], password=request.POST['password1'])
                 user.save()
                 login(request, user)
-                return redirect('index')
+                return redirect('account')
             except IntegrityError:
                 return render(request, 'readers/login_register.html', context,
                                   {'error': 'Такое имя уже существует'})
@@ -71,3 +73,19 @@ def profile(request, pk):
 def account(request):
     prof = request.user.profile
     return render(request, 'readers/account.html', {'profile': prof})
+
+
+@login_required(login_url='login')
+def edit_account(request):
+    prof = request.user.profile
+    form = ProfileForm(instance=prof)
+
+    if request.method == 'POST':
+        form = ProfileForm(request.POST, request.FILES, instance=prof)
+        if form.is_valid():
+            form.save()
+            return redirect('account')
+
+    context = {'form': form}
+    return render(request, 'readers/profile_form.html', context)
+
