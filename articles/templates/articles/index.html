@@ -17,4 +17,24 @@
 </div>
 
 {% endfor %}
+
+{% if arts.has_other_pages %}
+<div class="pagination">
+    <ul class="container">
+        {% if arts.has_previous %}
+        <li><a href="?page={{ arts.previous_page_number }}" class="btn1 page-link">&lt;Prev</a></li>
+        {% endif %}
+        {% for page in paginator.page_range %}
+        {% if page == arts.number %}
+        <li><a href="?page={{ page }}" class="btn2 page-link"> {{ page }} </a></li>
+        {% else %}
+        <li><a href="?page={{ page }}" class="btn1 page-link">{{ page }}</a></li>
+        {% endif %}
+        {% endfor %}
+        {% if arts.has_next %}
+        <li><a href="?page={{ arts.next_page_number }}" class="btn1 page-link">Next &gt;</a></li>
+        {% endif %}
+    </ul>
+</div>
+{% endif %}
 {% endblock %}

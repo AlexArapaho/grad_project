@@ -126,3 +126,34 @@ a {
 .green {
     color: green;
 }
+
+
+.pagination {
+  margin-top: 12px;
+  margin-bottom: 10px;
+}
+
+.pagination > ul {
+  flex-wrap: wrap;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.pagination .btn1 {
+  color: black;
+}
+
+.pagination .btn2 .btn1 {
+  color: black;
+}
+
+.btn2 {
+  background-color: grey;
+}
+
+.btn1 {
+  background-color: lightgrey;
+}

@@ -2,12 +2,23 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .models import Articles, PostFeedback, User
 from .forms import PostFeedbackForm
 from django.contrib.auth.forms import UserCreationForm
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 
 
 def index(request):
     arts = Articles.objects.all()
     prof = request.user
-    return render(request, 'articles/index.html', {'arts': arts, "prof": prof})
+    page = request.GET.get('page')
+    results = 5
+    paginator = Paginator(arts, results)
+    try:
+        arts = paginator.page(page)
+    except PageNotAnInteger:
+        page = 1
+        arts = paginator.page(page)
+    except EmptyPage:
+        page = paginator.page(page)
+    return render(request, 'articles/index.html', {'arts': arts, "prof": prof, 'paginator': paginator})
 
 
 def detail(request, pk):
