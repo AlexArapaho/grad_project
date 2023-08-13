@@ -1,5 +1,6 @@
 from django.forms import ModelForm
-from .models import PostFeedback
+from .models import PostFeedback, Rating
+
 
 
 class PostFeedbackForm(ModelForm):
@@ -10,3 +11,10 @@ class PostFeedbackForm(ModelForm):
         labels = {
             'feedback': '',
         }
+
+class RatingForm(ModelForm):
+    class Meta:
+        model = Rating
+        fields = ["rating"]
+        labels = {"rating": "Оценка"}
+

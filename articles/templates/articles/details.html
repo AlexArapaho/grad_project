@@ -8,19 +8,26 @@
         <p class="img2"><img src="{{ art.title_pic.url }}" alt=""></p>
     </div>
         <p class="text">{{ art.art_text|safe }}</p>
-        <p class="rating">Оценка читателей: {{ art.rating }}</p>
+        <p class="rating">Оценка читателей: {{ avg_rating }} </p>
         {% for feed in art.postfeedback_set.all %}
         <div class="postfeedsection">
         <p> Комментарий читателя <a href="{% url 'profile' feed.commentator.id %}">{{ feed.commentator }}</a></p>
         <p class="postedfeed">{{ feed }}</p>
         </div>
         {% endfor %}
-    <h2 class="feed">Напишите комментарий к статье</h2>
+
     <div>{{ error }}</div>
+    <h2 class="feed">Поставьте оценку статье</h2>
     <form method="post">
         {% csrf_token %}
+        {{ form2.as_p }}
+
+<!--    </form>-->
+    <h2 class="feed">Напишите комментарий к статье</h2>
+<!--    <form method="post">-->
+        {% csrf_token %}
         {{ form.as_p }}
-        <div><button class="btn">Опубликовать комментарий</button></div>
+        <div><button class="btn">Опубликовать оценку и комментарий</button></div>
     </form>
 </div>
 {% endblock %}

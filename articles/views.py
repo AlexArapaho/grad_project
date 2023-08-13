@@ -1,8 +1,9 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Articles, PostFeedback, User
-from .forms import PostFeedbackForm
+from .models import Articles, PostFeedback, User, Rating
+from .forms import PostFeedbackForm, RatingForm
 from django.contrib.auth.forms import UserCreationForm
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
+from django.db.models import Avg
 
 
 def index(request):
@@ -24,33 +25,30 @@ def index(request):
 def detail(request, pk):
     # art = get_object_or_404(Articles, pk=art_id)
     art = Articles.objects.get(id=pk)
+    qs = art.rating_set.aggregate(Avg("rating"))['rating__avg']
+    if qs is not None:
+        avg_rating = round(qs, 2)
+        art.average_rating = avg_rating
+        art.save()
+    else:
+        avg_rating = 0
     form = PostFeedbackForm()
+    form2 = RatingForm()
     if request.method == 'POST':
         try:
             form = PostFeedbackForm(request.POST)
+            form2 = RatingForm(request.POST)
             feedback = form.save(commit=False)
+            rating = form2.save(commit=False)
             feedback.article = art
+            rating.article = art
             feedback.commentator = request.user.profile
+            art.average_rating = avg_rating
             feedback.save()
+            rating.save()
             return redirect('detail', pk=art.id)
         except AttributeError:
             return redirect('login')
 
-    # new_feed = Feedback.objects.all()
-    # prof = request.user
-    # context = {
-    #     'art': art,
-    #     'new_feed': new_feed,
-    #     'prof': prof,
-    #     'form': FeedbackForm()
-    # }
-    #
-    # if request.method == 'GET':
-    #     return render(request, 'articles/details.html', context)
-    # else:
-    #     form = FeedbackForm(request.POST)
-    #     new_feed = form.save(commit=False)
-    #     new_feed.user = request.user.profile
-    #     new_feed.save()
-    #     return render(request, 'articles/details.html', context)
-    return render(request, 'articles/details.html', {'art': art, 'form': form})
+
+    return render(request, 'articles/details.html', {'art': art, 'form': form, "form2": form2, "avg_rating": avg_rating})
