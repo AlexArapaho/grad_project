@@ -4,10 +4,14 @@ from .forms import PostFeedbackForm, RatingForm
 from django.contrib.auth.forms import UserCreationForm
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.db.models import Avg
+from django.db.models import Q
 
 
 def index(request):
-    arts = Articles.objects.all()
+    search_query = ''
+    if request.GET.get('search_query'):
+        search_query = request.GET.get('search_query')
+    arts = Articles.objects.filter(Q(art_text__icontains=search_query) | Q(title__icontains=search_query))
     prof = request.user
     page = request.GET.get('page')
     results = 5
@@ -19,7 +23,7 @@ def index(request):
         arts = paginator.page(page)
     except EmptyPage:
         page = paginator.page(page)
-    return render(request, 'articles/index.html', {'arts': arts, "prof": prof, 'paginator': paginator})
+    return render(request, 'articles/index.html', {'arts': arts, "prof": prof, 'paginator': paginator, 'search_query': search_query})
 
 
 def detail(request, pk):

@@ -3,8 +3,14 @@
 {% block content %}
 
 
-<p class="des">Статьи об интересных (по мнению автора) фактах<br>
+<div>
+    <p class="des">Статьи об интересных (по мнению автора) фактах<br>
     и явлениях культуры, истории, политики, литературы и т.д. </p>
+    <form class="search_form" action="{% url 'index' %}" method="get">
+        <input class="search" type="text" name="search_query" value="{{ search_query }}" placeholder="Поиск по сайту">
+    </form>
+</div>
+
 
 {% for art in arts %}
 <div class="element">

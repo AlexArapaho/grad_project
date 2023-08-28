@@ -1,7 +1,7 @@
 {% extends 'articles/base.html' %}
 {% block content %}
-<h1 class="element2"> Имя читателя: {{ profile.name }} </h1>
-<h1 class="element2"><img src="{{ profile.profile_image.url }}"></h1>
-<h1 class="element2"> Информация: {{ profile.info }} </h1>
+<h1 class="element2 high"> Имя читателя: {{ profile.name }} </h1>
+<div class="element2 accprof"><img src="{{ profile.profile_image.url }}"></div>
+<div class="element2 accprof"> Информация: {{ profile.info }} </div>
 
 {% endblock %}

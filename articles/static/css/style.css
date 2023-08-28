@@ -19,7 +19,9 @@ body {
     line-height:110px;
 }
 
-
+.search_form {
+    text-align: center;
+}
 
 .des{
     text-align: center;
@@ -49,7 +51,18 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+
+}
+
+
+
+.element2.high {
     padding-top: 170px;
+}
+
+.element2.accprof {
+    font-weight: bold;
+    margin-top: 10px;
 }
 
 .element3{
