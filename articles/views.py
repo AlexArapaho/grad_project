@@ -23,7 +23,17 @@ def index(request):
         arts = paginator.page(page)
     except EmptyPage:
         page = paginator.page(page)
-    return render(request, 'articles/index.html', {'arts': arts, "prof": prof, 'paginator': paginator, 'search_query': search_query})
+
+    left_index = int(page) - 4
+    if left_index < 1:
+        left_index = 1
+    right_index = int(page) + 5
+    if right_index > paginator.num_pages:
+        right_index = paginator.num_pages + 1
+    custom_range = range(left_index, right_index)
+
+    return render(request, 'articles/index.html', {'arts': arts, "prof": prof, 'paginator': paginator,
+                                                   'search_query': search_query, 'custom_range': custom_range})
 
 
 def detail(request, pk):

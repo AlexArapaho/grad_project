@@ -1,13 +1,15 @@
 {% extends "articles/base.html" %}
 
+
 {% block content %}
 
 
 <div>
     <p class="des">Статьи об интересных (по мнению автора) фактах<br>
     и явлениях культуры, истории, политики, литературы и т.д. </p>
-    <form class="search_form" action="{% url 'index' %}" method="get">
+    <form id="sr" class="search_form" action="{% url 'index' %}" method="get">
         <input class="search" type="text" name="search_query" value="{{ search_query }}" placeholder="Поиск по сайту">
+<!--        <input class="btn" type="submit" value="Искать"/>-->
     </form>
 </div>
 
@@ -28,19 +30,38 @@
 <div class="pagination">
     <ul class="container">
         {% if arts.has_previous %}
-        <li><a href="?page={{ arts.previous_page_number }}" class="btn1 page-link">&lt;Prev</a></li>
+        <li><a href="?page={{ arts.previous_page_number }}" class="btn1 page-link" data-page="{{ arts.previous_page_number }}">&lt;Prev</a></li>
         {% endif %}
-        {% for page in paginator.page_range %}
+        {% for page in custom_range %}
         {% if page == arts.number %}
-        <li><a href="?page={{ page }}" class="btn2 page-link"> {{ page }} </a></li>
+        <li><a href="?page={{ page }}" class="btn2 page-link" data-page="{{ page }}"> {{ page }} </a></li>
         {% else %}
-        <li><a href="?page={{ page }}" class="btn1 page-link">{{ page }}</a></li>
+        <li><a href="?page={{ page }}" class="btn1 page-link" data-page="{{ page }}">{{ page }}</a></li>
         {% endif %}
         {% endfor %}
         {% if arts.has_next %}
-        <li><a href="?page={{ arts.next_page_number }}" class="btn1 page-link">Next &gt;</a></li>
+        <li><a href="?page={{ arts.next_page_number }}" class="btn1 page-link" data-page="{{ arts.next_page_number }}">Next &gt;</a></li>
         {% endif %}
     </ul>
 </div>
 {% endif %}
+
+<script>
+let searchForm = document.getElementById("sr");
+let pageLinks = document.querySelectorAll(".page-link");
+
+if(searchForm){
+    for(let i=0; pageLinks.length > i; i++){
+        pageLinks[i].addEventListener('click', function(e){
+            e.preventDefault();
+
+            let page = this.dataset.page;
+
+            searchForm.innerHTML += `<input value=${page} name="page" type="hidden">`;
+
+            searchForm.submit();
+        })
+    }
+}
+</script>
 {% endblock %}
