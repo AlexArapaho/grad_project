@@ -10,7 +10,7 @@ from django.db.models import Q
 def index(request):
     search_query = ''
     if request.GET.get('search_query'):
-        search_query = request.GET.get('search_query')
+        search_query = request.GET.get('search_query').lower()
     arts = Articles.objects.filter(Q(art_text__icontains=search_query) | Q(title__icontains=search_query))
     prof = request.user
     page = request.GET.get('page')

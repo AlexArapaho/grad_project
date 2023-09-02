@@ -1,7 +1,7 @@
 {% extends 'articles/base.html' %}
 {% load static %}
 {% block content %}
-<p class="element2">Редактирование профиля</p>
+<p class="element2 high">Редактирование профиля</p>
                 <form class="register" method="POST" action="{% url 'edit_account' %}" enctype="multipart/form-data">
                     {% csrf_token %}
 

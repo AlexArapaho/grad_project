@@ -1,3 +1,5 @@
+import random
+
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from .models import Profile
@@ -6,6 +8,7 @@ from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from .forms import ProfileForm
+from random import randint
 from django.core.exceptions import ObjectDoesNotExist
 
 
@@ -67,11 +70,19 @@ def logout_reader(request):
 
 def profile(request, pk):
     prof = Profile.objects.get(id=pk)
+    img_list = ['readers/default.png', 'readers/default1.png', 'readers/default2.png']
+    rand_img = img_list[random.randint(0, len(img_list) - 1)]
+    if prof.profile_image in img_list:
+        prof.profile_image = rand_img
 
     return render(request, 'readers/profile.html', {'profile': prof})
 
 def account(request):
     prof = request.user.profile
+    img_list = ['readers/default.png', 'readers/default1.png', 'readers/default2.png']
+    rand_img = img_list[random.randint(0, len(img_list) - 1)]
+    if prof.profile_image in img_list:
+        prof.profile_image = rand_img
     return render(request, 'readers/account.html', {'profile': prof})
 
 

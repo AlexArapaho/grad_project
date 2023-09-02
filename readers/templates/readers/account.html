@@ -1,7 +1,7 @@
 {% extends 'articles/base.html' %}
 {% block content %}
 <h1 class="element2 high"> Аккаунт читателя </h1>
-<div class="element2 accprof"> <a class="green" href="{% url 'edit_account' %}"> Редактировать аккаунт </a></div>
+<div class="element2 accprof"> <a class="green" href="{% url 'edit_account' %}"> Редактировать аккаунт (расскажите о себе и загрузите свою аватарку)  </a></div>
 <div class="element2 accprof"> Имя: {{ profile.name }} </div>
 <div class="element2 accprof"><img src="{{ profile.profile_image.url }}"></div>
 <div class="element2 accprof"> Информация: {{ profile.info }} </div>

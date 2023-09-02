@@ -13,6 +13,8 @@
         <div class="postfeedsection">
         <p> Комментарий читателя <a href="{% url 'profile' feed.commentator.id %}">{{ feed.commentator }}</a></p>
         <p class="postedfeed">{{ feed }}</p>
+
+
         </div>
         {% endfor %}
 
@@ -30,4 +32,5 @@
         <div><button class="btn">Опубликовать оценку и комментарий</button></div>
     </form>
 </div>
+
 {% endblock %}

@@ -18,3 +18,4 @@ class RatingForm(ModelForm):
         fields = ["rating"]
         labels = {"rating": "Оценка"}
 
+
