@@ -1,8 +1,15 @@
-{% extends 'articles/base.html' %}
-
-{% block content %}
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Блог Александра Грибова</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="icon" type='image/x-icon' href="{% static 'articles/favicon.ico' %}">
+</head>
+<body>
 {% if page == 'register' %}
-<div class="element3">
+<div>
 <h1>Регистрация</h1>
 <div>{{ error }}</div>
 <form class='register' action="{% url 'register' %}" method='post'>
@@ -12,7 +19,7 @@
 </form>
 </div>
 {% else %}
-<div class="element3">
+<div>
     <h1>Авторизация</h1>
 <div>{{ error }}</div>
 <form class='register' action="{% url 'login' %}" method='post'>
@@ -22,4 +29,5 @@
 </form>
 </div>
 {% endif %}
-{% endblock %}
+</body>
+</html>

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Блог Александра Грибова</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="icon" type='image/x-icon' href="{% static 'articles/favicon.ico' %}">
+</head>
+<body>
+
+<form class="register element2" method="POST">
+    <p>Если вы хотите заказать статью, перевод с/на аглийский или португальский, разместить рекламу либо что-то сообщить - отправьте нам сообщение</p>
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button class="btn" type="submit">Отправить</button>
+</form>
+</body>
+</html>

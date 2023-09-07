@@ -1,10 +1,14 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Articles, PostFeedback, User, Rating
-from .forms import PostFeedbackForm, RatingForm
+from .forms import PostFeedbackForm, RatingForm, ContactForm
 from django.contrib.auth.forms import UserCreationForm
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.db.models import Avg
 from django.db.models import Q
+from django.core.mail import send_mail, BadHeaderError
+from django.conf import settings
+from django.http import HttpResponse
+
 
 
 def index(request):
@@ -66,3 +70,18 @@ def detail(request, pk):
 
 
     return render(request, 'articles/details.html', {'art': art, 'form': form, "form2": form2, "avg_rating": avg_rating})
+
+
+def contact_send_mail(request):
+    if request.method == "GET":
+        form = ContactForm()
+        return render(request, 'articles/contact.html', {'form': form})
+    else:
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            frommail=form.cleaned_data['frommail']
+            subject=form.cleaned_data['subject']
+            message=form.cleaned_data['message']
+            content = f"Сообщение от {frommail}:\n {message}"
+            send_mail(subject, content, frommail, ['kayova22@gmail.com'], fail_silently=False)
+        return redirect ('contact')

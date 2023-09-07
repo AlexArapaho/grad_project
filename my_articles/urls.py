@@ -24,6 +24,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index, name='index'),
     path('details/', include('articles.urls')),
+    path('contact/', views.contact_send_mail, name='contact'),
     path('', include('readers.urls')),
 ]
 
