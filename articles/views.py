@@ -15,10 +15,10 @@ def index(request):
     search_query = ''
     if request.GET.get('search_query'):
         search_query = request.GET.get('search_query').lower()
-    arts = Articles.objects.filter(Q(art_text__icontains=search_query) | Q(title__icontains=search_query))
+    arts = Articles.objects.filter(Q(art_text__contains=search_query) | Q(title__contains=search_query))
     prof = request.user
     page = request.GET.get('page')
-    results = 5
+    results = 4
     paginator = Paginator(arts, results)
     try:
         arts = paginator.page(page)

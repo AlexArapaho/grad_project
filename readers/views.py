@@ -8,7 +8,6 @@ from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from .forms import ProfileForm
-from random import randint
 from django.core.exceptions import ObjectDoesNotExist
 
 

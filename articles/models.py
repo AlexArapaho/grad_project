@@ -35,9 +35,9 @@ class Rating(models.Model):
         (5, "Отлично!")
     )
     article = models.ForeignKey(Articles, on_delete=models.CASCADE)
-    rating = models.IntegerField(choices=VOTE, default=0, blank=True)
+    rating = models.IntegerField(choices=VOTE, blank=True)
 
-    def __str__(self):
-        return self.rating
+    # def __str__(self):
+    #     return self.rating
 
 
