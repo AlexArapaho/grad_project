@@ -30,7 +30,7 @@
 <div class="pagination">
     <ul class="container">
         {% if arts.has_previous %}
-        <li><a href="?page={{ arts.previous_page_number }}" class="btn1 page-link" data-page="{{ arts.previous_page_number }}">&lt;Prev</a></li>
+        <li><a href="?page={{ arts.previous_page_number }}" class="btn1 page-link" data-page="{{ arts.previous_page_number }}">&lt; Пред.</a></li>
         {% endif %}
         {% for page in custom_range %}
         {% if page == arts.number %}
@@ -40,7 +40,7 @@
         {% endif %}
         {% endfor %}
         {% if arts.has_next %}
-        <li><a href="?page={{ arts.next_page_number }}" class="btn1 page-link" data-page="{{ arts.next_page_number }}">Next &gt;</a></li>
+        <li><a href="?page={{ arts.next_page_number }}" class="btn1 page-link" data-page="{{ arts.next_page_number }}">След. &gt;</a></li>
         {% endif %}
     </ul>
 </div>

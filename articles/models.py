@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from readers.models import Profile
 
+
 class Articles(models.Model):
     objects = None
     title = models.CharField(max_length=200)

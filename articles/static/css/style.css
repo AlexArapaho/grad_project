@@ -180,3 +180,14 @@ a {
 .btn1 {
   background-color: lightgrey;
 }
+
+.prof{
+    display: flex;
+    padding-left: 15px;
+}
+
+.two{
+    margin-left: 25px;
+    font-size: 20px;
+}
+
